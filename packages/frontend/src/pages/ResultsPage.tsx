@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { apiClient } from '../api/client';
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { apiClient } from "../api/client";
 
 interface QuestionResult {
   question: any;
@@ -28,21 +28,21 @@ export default function ResultsPage() {
       const data = await apiClient.getSessionResults(parseInt(sessionId));
       setResults(data);
     } catch (error) {
-      console.error('Failed to load results:', error);
+      console.error("Failed to load results:", error);
     } finally {
       setIsLoading(false);
     }
   };
 
   const formatTime = (seconds: number | null) => {
-    if (!seconds) return 'N/A';
+    if (!seconds) return "N/A";
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
   };
 
   const getScorePercentage = () => {
-    if (!results) return 0;
+    if (!results) return "0";
     return ((results.score / results.totalQuestions) * 100).toFixed(0);
   };
 
@@ -60,7 +60,7 @@ export default function ResultsPage() {
         <div className="text-center">
           <p className="text-gray-600 mb-4">Failed to load results</p>
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate("/")}
             className="text-blue-600 hover:text-blue-700"
           >
             Return to Home
@@ -76,9 +76,11 @@ export default function ResultsPage() {
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-gray-900">Practice Results</h1>
+            <h1 className="text-2xl font-bold text-gray-900">
+              Practice Results
+            </h1>
             <button
-              onClick={() => navigate('/')}
+              onClick={() => navigate("/")}
               className="px-4 py-2 text-sm text-gray-700 hover:text-gray-900 border border-gray-300 rounded-md hover:bg-gray-50"
             >
               Back to Home
@@ -99,10 +101,10 @@ export default function ResultsPage() {
               <div
                 className={`text-5xl font-bold mb-2 ${
                   parseInt(getScorePercentage()) >= 70
-                    ? 'text-green-600'
+                    ? "text-green-600"
                     : parseInt(getScorePercentage()) >= 50
-                    ? 'text-yellow-600'
-                    : 'text-red-600'
+                      ? "text-yellow-600"
+                      : "text-red-600"
                 }`}
               >
                 {getScorePercentage()}%
@@ -119,13 +121,16 @@ export default function ResultsPage() {
               </div>
               <div className="text-gray-600">Time</div>
               <div className="text-sm text-gray-500 mt-1">
-                {results.session.timedSession ? 'Timed session' : 'Untimed'}
+                {results.session.timedSession ? "Timed session" : "Untimed"}
               </div>
             </div>
 
             <div className="text-center">
               <div className="text-5xl font-bold text-purple-600 mb-2">
-                {results.questions.filter((q: QuestionResult) => q.isFlagged).length}
+                {
+                  results.questions.filter((q: QuestionResult) => q.isFlagged)
+                    .length
+                }
               </div>
               <div className="text-gray-600">Flagged</div>
               <div className="text-sm text-gray-500 mt-1">Questions marked</div>
@@ -135,25 +140,38 @@ export default function ResultsPage() {
 
         {/* Question Review */}
         <div className="space-y-6">
-          <h2 className="text-xl font-semibold text-gray-900">Question Review</h2>
+          <h2 className="text-xl font-semibold text-gray-900">
+            Question Review
+          </h2>
 
           {results.questions.map((qResult: QuestionResult, idx: number) => (
-            <div key={qResult.question.id} className="bg-white rounded-lg shadow p-6">
+            <div
+              key={qResult.question.id}
+              className="bg-white rounded-lg shadow p-6"
+            >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <h3 className="text-lg font-semibold text-gray-900">
                     Question {idx + 1}
                   </h3>
-                  {qResult.isFlagged && <span className="text-red-500">🚩</span>}
+                  {qResult.isFlagged && (
+                    <span className="text-red-500">🚩</span>
+                  )}
                   {qResult.isCorrect ? (
-                    <span className="text-green-600 font-medium">✓ Correct</span>
+                    <span className="text-green-600 font-medium">
+                      ✓ Correct
+                    </span>
                   ) : (
-                    <span className="text-red-600 font-medium">✗ Incorrect</span>
+                    <span className="text-red-600 font-medium">
+                      ✗ Incorrect
+                    </span>
                   )}
                 </div>
               </div>
 
-              <p className="text-gray-700 mb-4">{qResult.question.questionText}</p>
+              <p className="text-gray-700 mb-4">
+                {qResult.question.questionText}
+              </p>
 
               <div className="space-y-3">
                 {qResult.allChoices.map((choice: any) => {
@@ -165,22 +183,28 @@ export default function ResultsPage() {
                       key={choice.id}
                       className={`p-4 rounded-lg border-2 ${
                         isCorrectAnswer
-                          ? 'border-green-500 bg-green-50'
+                          ? "border-green-500 bg-green-50"
                           : isUserAnswer
-                          ? 'border-red-500 bg-red-50'
-                          : 'border-gray-200'
+                            ? "border-red-500 bg-red-50"
+                            : "border-gray-200"
                       }`}
                     >
                       <div className="flex items-start gap-2 mb-2">
-                        <span className="font-bold">{choice.choiceLetter}.</span>
+                        <span className="font-bold">
+                          {choice.choiceLetter}.
+                        </span>
                         <div className="flex-1">
                           <div className="flex items-center gap-2">
                             <span>{choice.choiceText}</span>
                             {isCorrectAnswer && (
-                              <span className="text-green-600 font-medium">✓ Correct</span>
+                              <span className="text-green-600 font-medium">
+                                ✓ Correct
+                              </span>
                             )}
                             {isUserAnswer && !isCorrectAnswer && (
-                              <span className="text-red-600 font-medium">Your answer</span>
+                              <span className="text-red-600 font-medium">
+                                Your answer
+                              </span>
                             )}
                           </div>
                           <p className="text-sm text-gray-700 mt-2 italic">
@@ -207,7 +231,7 @@ export default function ResultsPage() {
         {/* Action Buttons */}
         <div className="mt-8 flex justify-center gap-4">
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate("/")}
             className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium"
           >
             Practice More
