@@ -1,0 +1,23 @@
+{
+  "name": "mcat-cars-practice-app",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "bun run dev:backend & bun run dev:frontend",
+    "dev:backend": "cd packages/backend && bun run dev",
+    "dev:frontend": "cd packages/frontend && bun run dev",
+    "build": "bun run build:shared && bun run build:backend && bun run build:frontend",
+    "build:shared": "cd packages/shared && bun run build",
+    "build:backend": "cd packages/backend && bun run build",
+    "build:frontend": "cd packages/frontend && bun run build",
+    "db:migrate": "cd packages/backend && bun run db:migrate",
+    "db:seed": "cd packages/backend && bun run db:seed",
+    "db:studio": "cd packages/backend && bun run db:studio"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}
