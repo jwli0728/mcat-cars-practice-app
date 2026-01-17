@@ -9,7 +9,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "types": ["bun-types"],
     "paths": {
       "@mcat-app/shared": ["../shared/src/types/index.ts"]
     }
