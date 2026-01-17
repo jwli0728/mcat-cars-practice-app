@@ -1,4 +1,4 @@
-import type { Context, Next } from 'hono';
+import type { MiddlewareHandler } from 'hono';
 import { AuthService } from '../services/auth-service';
 
 export interface AuthContext {
@@ -6,7 +6,7 @@ export interface AuthContext {
   email: string;
 }
 
-export async function authMiddleware(c: Context, next: Next) {
+export const authMiddleware: MiddlewareHandler = async (c, next) => {
   const authHeader = c.req.header('Authorization');
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {

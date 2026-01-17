@@ -1,4 +1,5 @@
 import { Hono } from 'hono';
+import '../types/hono'; // Import type extensions
 import { SessionService } from '../services/session-service';
 import { authMiddleware } from '../middleware/auth';
 import { CreateSessionRequestSchema, SubmitAnswerRequestSchema } from '@mcat-app/shared';

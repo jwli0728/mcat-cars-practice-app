@@ -1,4 +1,5 @@
 import { Hono } from 'hono';
+import '../types/hono'; // Import type extensions
 import { PassageService } from '../services/passage-service';
 import { authMiddleware } from '../middleware/auth';
 

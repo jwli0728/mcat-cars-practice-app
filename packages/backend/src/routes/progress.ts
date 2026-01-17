@@ -1,4 +1,5 @@
 import { Hono } from 'hono';
+import '../types/hono'; // Import type extensions
 import { db } from '../db/index';
 import { userProgress } from '../db/schema';
 import { eq } from 'drizzle-orm';
