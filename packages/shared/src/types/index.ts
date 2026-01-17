@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 // User types
 export const UserSchema = z.object({
@@ -17,7 +17,7 @@ export const PassageSchema = z.object({
   title: z.string(),
   content: z.string(),
   category: z.string(),
-  difficulty: z.enum(['Easy', 'Medium', 'Hard']),
+  difficulty: z.enum(["Easy", "Medium", "Hard"]),
   estimatedTime: z.number(), // in seconds
   createdAt: z.date(),
   updatedAt: z.date(),
@@ -40,7 +40,7 @@ export type Question = z.infer<typeof QuestionSchema>;
 export const AnswerChoiceSchema = z.object({
   id: z.number(),
   questionId: z.number(),
-  choiceLetter: z.enum(['A', 'B', 'C', 'D']),
+  choiceLetter: z.enum(["A", "B", "C", "D"]),
   choiceText: z.string(),
   isCorrect: z.boolean(),
   explanation: z.string(),
